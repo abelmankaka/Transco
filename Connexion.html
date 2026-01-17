@@ -3,16 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TRANSCO - Transport en Commun RDC</title>
+  <title>Connexion Admin - TRANSCO</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    /* Styles manuels - ajustés pour paraître naturel */
-    body {
-      font-family: 'Arial', sans-serif;
-      background: #f5f5f5;
+    /* Mêmes styles que les autres pages */
+    :root {
+      --transco-red: #e31837;
+      --transco-blue: #0055a4;
+      --transco-yellow: #ffd100;
     }
     
-    /* Header personnalisé */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Header identique */
     .site-header {
       background: white;
       border-bottom: 4px solid #e31837;
@@ -29,7 +38,7 @@
     .ns { color: #0055a4; }
     .co { color: #ffd100; }
     
-    /* Navigation */
+    /* Navigation identique */
     .main-nav {
       background: #f8f9fa;
       border-top: 1px solid #dee2e6;
@@ -40,6 +49,7 @@
       font-weight: 500;
       padding: 12px 15px !important;
       border-right: 1px solid #dee2e6;
+      text-decoration: none;
     }
     
     .nav-link-custom:hover {
@@ -47,276 +57,443 @@
       color: white !important;
     }
     
-    /* Hero section */
-    .hero-bg {
-      background: linear-gradient(135deg, #0055a4 0%, #003366 100%);
-      color: white;
-      border-radius: 8px;
-      padding: 40px;
-      margin: 20px 0;
+    .nav-link-custom.active {
+      background: #0055a4;
+      color: white !important;
     }
     
-    /* Cartes services */
-    .service-card {
-      background: white;
-      border-radius: 6px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-      border-top: 5px solid #e31837;
-      height: 100%;
-    }
-    
-    .service-card.blue {
-      border-top-color: #0055a4;
-    }
-    
-    .service-card.yellow {
-      border-top-color: #ffd100;
-    }
-    
-    /* Section avantages */
-    .avantage-item {
-      text-align: center;
-      padding: 15px;
-    }
-    
-    .avantage-icon {
-      width: 60px;
-      height: 60px;
-      background: #e31837;
-      color: white;
-      border-radius: 50%;
+    /* Contenu principal - centré pour connexion */
+    .main-content {
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 15px;
-      font-size: 24px;
+      padding: 40px 20px;
     }
     
-    /* Footer */
+    /* Carte de connexion - style cohérent */
+    .login-card {
+      background: white;
+      border-radius: 8px;
+      padding: 40px;
+      width: 100%;
+      max-width: 450px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      border-top: 5px solid #0055a4;
+      border-left: 4px solid #ffd100;
+    }
+    
+    .login-title {
+      color: #0055a4;
+      text-align: center;
+      margin-bottom: 10px;
+      font-weight: 600;
+      border-bottom: 2px solid #ffd100;
+      padding-bottom: 15px;
+    }
+    
+    /* Formulaire - style cohérent */
+    .form-group {
+      margin-bottom: 25px;
+    }
+    
+    .form-label {
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 8px;
+      display: block;
+    }
+    
+    .form-input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+    
+    .form-input:focus {
+      border-color: #0055a4;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 85, 164, 0.1);
+    }
+    
+    /* Bouton - style cohérent */
+    .btn-login {
+      background: #0055a4;
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+      width: 100%;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+    
+    .btn-login:hover {
+      background: #003366;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .btn-login:active {
+      transform: translateY(0);
+    }
+    
+    /* Options supplémentaires */
+    .login-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+    
+    .remember-me {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .forgot-password {
+      color: #0055a4;
+      text-decoration: none;
+    }
+    
+    .forgot-password:hover {
+      text-decoration: underline;
+    }
+    
+    /* Message d'information */
+    .login-info {
+      background: #fff9e6;
+      border-left: 4px solid #ffd100;
+      padding: 15px;
+      margin-top: 30px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+    
+    .login-info strong {
+      color: #e31837;
+    }
+    
+    /* Badge de sécurité */
+    .security-badge {
+      display: inline-block;
+      background: #28a745;
+      color: white;
+      font-size: 0.7rem;
+      padding: 3px 10px;
+      border-radius: 12px;
+      margin-left: 10px;
+      vertical-align: middle;
+    }
+    
+    /* Footer identique */
     .site-footer {
       background: #333;
       color: white;
-      padding: 30px 0;
-      margin-top: 50px;
+      padding: 25px 0;
       border-top: 5px solid #ffd100;
     }
     
-    /* Petites imperfections volontaires pour l'authenticité */
-    .manual-spacing {
-      margin-top: 15px !important;
-    }
-    
-    .irregular-shadow {
-      box-shadow: 0 4px 8px rgba(0,0,0,0.12);
-    }
-    
-    /* Responsive manuel */
+    /* Responsive - mêmes breakpoints */
     @media (max-width: 768px) {
       .logo-transco {
         font-size: 1.8rem;
       }
       
-      .hero-bg {
+      .nav-link-custom {
+        padding: 10px 12px !important;
+        font-size: 0.9rem;
+        border-right: none;
+        border-bottom: 1px solid #dee2e6;
+      }
+      
+      .login-card {
+        padding: 25px;
+      }
+      
+      .login-options {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .login-card {
         padding: 20px;
       }
       
-      .nav-link-custom {
-        border-right: none;
-        border-bottom: 1px solid #dee2e6;
+      .login-title {
+        font-size: 1.5rem;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Header -->
+  <!-- Header identique -->
   <header class="site-header">
     <div class="container">
       <div class="text-center py-3">
-        <h1 class="logo-transco">
+        <h1 class="logo-transco mb-2">
           <span class="tra">TRA</span><span class="ns">NS</span><span class="co">CO</span>
         </h1>
-        <p class="text-muted mb-0">Transport en Commun de la République Démocratique du Congo</p>
-        <p class="text-muted small">Service public depuis 2015</p>
+        <p class="text-muted mb-1">Portail d'administration TRANSCO RDC</p>
       </div>
-    </div>
-    
-    <!-- Navigation - version manuelle -->
-    <nav class="main-nav">
-      <div class="container">
-        <div class="d-flex flex-wrap justify-content-center">
-          <a href="accueil.html" class="nav-link-custom text-decoration-none">Accueil</a>
-          <a href="actualites.html" class="nav-link-custom text-decoration-none">Actualités</a>
-          <a href="apropos.html" class="nav-link-custom text-decoration-none">À propos</a>
-          <a href="connexion.html" class="nav-link-custom text-decoration-none">Connexion</a>
-          <a href="contact.html" class="nav-link-custom text-decoration-none">Contact</a>
-          <a href="galerie.html" class="nav-link-custom text-decoration-none">Galerie</a>
-          <a href="horaire.html" class="nav-link-custom text-decoration-none">Horaires</a>
-          <a href="itineraire.html" class="nav-link-custom text-decoration-none">Itinéraires</a>
-          <a href="ligne.html" class="nav-link-custom text-decoration-none">Lignes</a>
-          <a href="tableau.html" class="nav-link-custom text-decoration-none">Tableau de bord</a>
+      
+      <!-- Navigation identique -->
+      <nav class="main-nav">
+        <div class="container">
+          <div class="d-flex flex-wrap justify-content-center">
+            <a href="accueil.html" class="nav-link-custom">Accueil</a>
+            <a href="actualites.html" class="nav-link-custom">Actualités</a>
+            <a href="apropos.html" class="nav-link-custom">À propos</a>
+            <a href="connexion.html" class="nav-link-custom active">Connexion</a>
+            <a href="contact.html" class="nav-link-custom">Contact</a>
+            <a href="galerie.html" class="nav-link-custom">Galerie</a>
+            <a href="horaire.html" class="nav-link-custom">Horaires</a>
+            <a href="itineraire.html" class="nav-link-custom">Itinéraires</a>
+            <a href="ligne.html" class="nav-link-custom">Lignes</a>
+            <a href="tableau.html" class="nav-link-custom">Tableau de bord</a>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
   </header>
 
-  <main class="container">
-    <!-- Section principale -->
-    <section class="hero-bg irregular-shadow">
-      <div class="row align-items-center">
-        <div class="col-md-7">
-          <h2 class="mb-3">Bienvenue chez TRANSCO</h2>
-          <p class="mb-3">Notre mission est de fournir un transport en commun fiable et accessible à tous les Congolais. Avec plus de 50 lignes à travers le pays, nous connectons les communautés et facilitons la mobilité urbaine.</p>
-          <p class="mb-3">TRANSCO s'engage à améliorer continuellement ses services pour répondre aux besoins croissants de la population. Notre équipe travaille jour et nuit pour assurer votre sécurité et votre confort.</p>
-          <p>Ce site vous permet de consulter nos horaires, lignes et itinéraires en temps réel.</p>
-          <a href="apropos.html" class="btn btn-warning mt-2">Découvrir notre histoire</a>
-        </div>
-        <div class="col-md-5">
-          <img src="IMG_20260109_150924_681.jpg" alt="ABEL MKK" class="img-fluid rounded irregular-shadow">
-          <p class="text-center small mt-2">Notre flotte moderne de véhicules</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Pourquoi nous choisir -->
-    <section class="my-5">
-      <h2 class="text-center mb-4" style="color: #0055a4; border-bottom: 2px solid #ffd100; padding-bottom: 10px;">Pourquoi choisir TRANSCO ?</h2>
+  <!-- Contenu principal -->
+  <main class="main-content">
+    <div class="login-card">
+      <h2 class="login-title">
+        Connexion Administrateur
+        <span class="security-badge">Sécurisé</span>
+      </h2>
       
-      <div class="row">
-        <div class="col-md-4 mb-4">
-          <div class="avantage-item">
-            <div class="avantage-icon">
-              <span>✓</span>
-            </div>
-            <h5 style="color: #e31837;">Fiabilité garantie</h5>
-            <p>Des horaires respectés et un service régulier sur toutes nos lignes. Moins de 2% d'annulations en 2025.</p>
-          </div>
-        </div>
-        
-        <div class="col-md-4 mb-4">
-          <div class="avantage-item">
-            <div class="avantage-icon" style="background: #0055a4;">
-              <span>👥</span>
-            </div>
-            <h5 style="color: #0055a4;">Accessible à tous</h5>
-            <p>Tarifs adaptés à tous les budgets. Cartes d'abonnement et réductions pour étudiants et personnes âgées.</p>
-          </div>
-        </div>
-        
-        <div class="col-md-4 mb-4">
-          <div class="avantage-item">
-            <div class="avantage-icon" style="background: #ffd100; color: #333;">
-              <span>⚡</span>
-            </div>
-            <h5 style="color: #ffd100;">Service moderne</h5>
-            <p>Application mobile, informations en temps réel et paiement électronique disponible.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Nos services -->
-    <section class="my-5">
-      <h2 class="text-center mb-4" style="color: #0055a4;">Nos services aux voyageurs</h2>
+      <p class="text-center text-muted mb-4">
+        Accédez à l'espace de gestion du site TRANSCO
+      </p>
       
-      <div class="row">
-        <div class="col-md-6 mb-4">
-          <div class="service-card">
-            <h5 class="mb-3" style="color: #e31837;">Informations voyageurs</h5>
-            <ul class="list-unstyled">
-              <li class="mb-2">✓ Consultation des lignes et horaires</li>
-              <li class="mb-2">✓ Tarifs et abonnements</li>
-              <li class="mb-2">✓ Points de vente près de chez vous</li>
-              <li class="mb-2">✓ Règlement intérieur</li>
-            </ul>
-            <a href="ligne.html" class="btn btn-sm btn-outline-danger">Voir les lignes</a>
+      <!-- Formulaire de connexion -->
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="username" class="form-label">Identifiant administrateur</label>
+          <input 
+            type="text" 
+            id="username" 
+            name="username" 
+            class="form-input" 
+            placeholder="Entrez votre nom d'utilisateur" 
+            required
+            autocomplete="username"
+          >
+          <div class="form-text" style="font-size: 0.85rem; color: #666; margin-top: 5px;">
+            Utilisez votre identifiant institutionnel TRANSCO
           </div>
         </div>
         
-        <div class="col-md-6 mb-4">
-          <div class="service-card blue">
-            <h5 class="mb-3" style="color: #0055a4;">Services en ligne</h5>
-            <ul class="list-unstyled">
-              <li class="mb-2">✓ Calcul d'itinéraire personnalisé</li>
-              <li class="mb-2">✓ Alertes trafic et perturbations</li>
-              <li class="mb-2">✓ Formulaire de contact en ligne</li>
-              <li class="mb-2">✓ Galerie photos et vidéos</li>
-            </ul>
-            <a href="itineraire.html" class="btn btn-sm btn-outline-primary">Planifier un trajet</a>
+        <div class="form-group">
+          <label for="password" class="form-label">Mot de passe</label>
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            class="form-input" 
+            placeholder="Entrez votre mot de passe" 
+            required
+            autocomplete="current-password"
+          >
+        </div>
+        
+        <!-- Options de connexion -->
+        <div class="login-options">
+          <div class="remember-me">
+            <input type="checkbox" id="remember" name="remember">
+            <label for="remember" style="cursor: pointer;">Se souvenir de moi</label>
           </div>
+          
+          <a href="#" class="forgot-password">Mot de passe oublié ?</a>
         </div>
+        
+        <!-- Bouton de connexion -->
+        <button type="submit" class="btn-login">
+          🔒 Se connecter à l'espace admin
+        </button>
+      </form>
+      
+      <!-- Message d'information -->
+      <div class="login-info">
+        <p class="mb-2"><strong>⚠️ Accès restreint</strong></p>
+        <p class="mb-0">
+          Cet espace est strictement réservé au personnel habilité de TRANSCO RDC.
+          Toute tentative d'accès non autorisé sera enregistrée dans les logs de sécurité.
+        </p>
       </div>
-    </section>
-
-    <!-- Alertes importantes -->
-    <div class="alert alert-warning irregular-shadow">
-      <div class="d-flex">
-        <div class="me-3">📢</div>
-        <div>
-          <strong>Information importante :</strong> Nouveaux horaires d'été applicables à partir du 1er juin 2026. Consultez la page des horaires pour plus de détails.
-          <a href="horaire.html" class="alert-link">Voir les changements</a>
-        </div>
+      
+      <!-- Information technique -->
+      <div class="text-center mt-4">
+        <p style="font-size: 0.8rem; color: #666;">
+          <span style="color: #28a745;">●</span> Connexion chiffrée SSL 
+          • Version 2.4.1 • Support: admin@transco.cd
+        </p>
       </div>
     </div>
   </main>
 
-  <!-- Footer -->
+  <!-- Footer identique -->
   <footer class="site-footer">
     <div class="container">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 text-md-start text-center mb-3 mb-md-0">
           <h5>TRANSCO RDC</h5>
-          <p>Service public de transport en commun<br>
-          Siège social : Kinshasa, Gombe<br>
-          Email : mankakaabel@gmail.com<br>
-          Téléphone : +243 818 420 765</p>
+          <p>Portail d'administration sécurisé<br>
+          Direction des Systèmes d'Information<br>
+          © 2015-2026 Tous droits réservés</p>
         </div>
         
-        <div class="col-md-6">
-          <h5>Liens rapides</h5>
-          <div class="row">
-            <div class="col-6">
-              <ul class="list-unstyled">
-                <li><a href="actualites.html" class="text-white text-decoration-none">Actualités</a></li>
-                <li><a href="horaire.html" class="text-white text-decoration-none">Horaires</a></li>
-                <li><a href="ligne.html" class="text-white text-decoration-none">Lignes</a></li>
-              </ul>
-            </div>
-            <div class="col-6">
-              <ul class="list-unstyled">
-                <li><a href="contact.html" class="text-white text-decoration-none">Contact</a></li>
-                <li><a href="apropos.html" class="text-white text-decoration-none">À propos</a></li>
-                <li><a href="connexion.html" class="text-white text-decoration-none">Espace personnel</a></li>
-              </ul>
-            </div>
-          </div>
+        <div class="col-md-6 text-md-end text-center">
+          <h5>Assistance technique</h5>
+          <p>Email : support@transco.cd<br>
+          Téléphone : +243 81 700 0000 (poste 123)<br>
+          Urgences sécurité : 24h/24</p>
         </div>
       </div>
       
-      <hr class="bg-light">
+      <hr class="bg-light my-3">
       
-      <div class="text-center pt-3">
-        <p class="mb-2">&copy; 2026 TRANSCO RDC. Tous droits réservés.</p>
-        <p class="small mb-0">Ministère des Transports - République Démocratique du Congo</p>
+      <div class="text-center">
+        <p class="small mb-0">
+          Système sécurisé • Authentification requise • Toutes les connexions sont tracées
+        </p>
       </div>
     </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   
-  <!-- Petit script manuel -->
   <script>
-    // Simple script pour la navigation active
+    // Script de gestion du formulaire
     document.addEventListener('DOMContentLoaded', function() {
-      const currentPage = window.location.pathname.split('/').pop();
-      const navLinks = document.querySelectorAll('.nav-link-custom');
+      const loginForm = document.getElementById('loginForm');
+      const usernameInput = document.getElementById('username');
+      const passwordInput = document.getElementById('password');
+      const loginButton = loginForm.querySelector('button[type="submit"]');
       
-      navLinks.forEach(link => {
-        if (link.getAttribute('href') === currentPage) {
-          link.style.backgroundColor = '#e31837';
-          link.style.color = 'white';
+      // Focus sur le champ username
+      usernameInput.focus();
+      
+      // Validation du formulaire
+      loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Récupération des valeurs
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value.trim();
+        
+        // Validation basique
+        if (!username || !password) {
+          showMessage('Veuillez remplir tous les champs requis.', 'error');
+          return;
         }
+        
+        if (username.length < 3) {
+          showMessage('L\'identifiant doit contenir au moins 3 caractères.', 'error');
+          return;
+        }
+        
+        if (password.length < 6) {
+          showMessage('Le mot de passe doit contenir au moins 6 caractères.', 'error');
+          return;
+        }
+        
+        // Simulation de chargement
+        const originalText = loginButton.innerHTML;
+        loginButton.innerHTML = '⏳ Connexion en cours...';
+        loginButton.disabled = true;
+        
+        // Simulation de l'authentification
+        setTimeout(() => {
+          // Pour cet exemple, on accepte certaines combinaisons
+          const testAccounts = {
+            'admin': 'admin123',
+            'transco': 'transco2026',
+            'demo': 'demo123'
+          };
+          
+          if (testAccounts[username] && password === testAccounts[username]) {
+            // Connexion réussie
+            showMessage('Connexion réussie ! Redirection en cours...', 'success');
+            
+            // Redirection vers le tableau de bord après 1.5 secondes
+            setTimeout(() => {
+              window.location.href = 'tableau.html';
+            }, 1500);
+          } else {
+            // Échec de connexion
+            showMessage('Identifiants incorrects. Veuillez réessayer.', 'error');
+            
+            // Réactiver le bouton
+            loginButton.innerHTML = originalText;
+            loginButton.disabled = false;
+            
+            // Sécurisation : vider le champ mot de passe
+            passwordInput.value = '';
+            passwordInput.focus();
+          }
+        }, 1500);
+      });
+      
+      // Fonction pour afficher des messages
+      function showMessage(message, type) {
+        // Supprimer les messages précédents
+        const existingMessage = document.querySelector('.form-message');
+        if (existingMessage) {
+          existingMessage.remove();
+        }
+        
+        // Créer le nouveau message
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `form-message alert alert-${type === 'error' ? 'danger' : 'success'} mt-3`;
+        messageDiv.style.padding = '10px 15px';
+        messageDiv.style.borderRadius = '6px';
+        messageDiv.innerHTML = message;
+        
+        // Insérer après le formulaire
+        loginForm.parentNode.insertBefore(messageDiv, loginForm.nextSibling);
+        
+        // Supprimer le message après 5 secondes
+        setTimeout(() => {
+          if (messageDiv.parentNode) {
+            messageDiv.remove();
+          }
+        }, 5000);
+      }
+      
+      // Lien "Mot de passe oublié"
+      const forgotPasswordLink = document.querySelector('.forgot-password');
+      if (forgotPasswordLink) {
+        forgotPasswordLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          alert('Pour réinitialiser votre mot de passe, contactez le support technique au +243 81 700 0000 (poste 123) ou envoyez un email à support@transco.cd');
+        });
+      }
+      
+      // Animation simple pour les champs de saisie
+      const formInputs = document.querySelectorAll('.form-input');
+      formInputs.forEach(input => {
+        input.addEventListener('focus', function() {
+          this.style.backgroundColor = '#fff9e6';
+        });
+        
+        input.addEventListener('blur', function() {
+          this.style.backgroundColor = '';
+        });
       });
     });
   </script>
