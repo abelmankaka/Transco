@@ -1,39 +1,640 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="fr">
 <head>
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
-  <title>Hello, World!</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - TRANSCO</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Mêmes styles que les autres pages */
+    :root {
+      --transco-red: #e31837;
+      --transco-blue: #0055a4;
+      --transco-yellow: #ffd100;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+    }
+    
+    /* Header identique */
+    .site-header {
+      background: white;
+      border-bottom: 4px solid #e31837;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .logo-transco {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+    
+    .tra { color: #e31837; }
+    .ns { color: #0055a4; }
+    .co { color: #ffd100; }
+    
+    /* Navigation identique */
+    .main-nav {
+      background: #f8f9fa;
+      border-top: 1px solid #dee2e6;
+    }
+    
+    .nav-link-custom {
+      color: #333 !important;
+      font-weight: 500;
+      padding: 12px 15px !important;
+      border-right: 1px solid #dee2e6;
+      text-decoration: none;
+    }
+    
+    .nav-link-custom:hover {
+      background: #e31837;
+      color: white !important;
+    }
+    
+    .nav-link-custom.active {
+      background: #0055a4;
+      color: white !important;
+    }
+    
+    /* Contenu principal - style cohérent */
+    .main-content {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    
+    /* Sections de contenu */
+    .content-section {
+      background: white;
+      border-radius: 8px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      border-left: 5px solid #0055a4;
+    }
+    
+    .section-title {
+      color: #0055a4;
+      border-bottom: 2px solid #ffd100;
+      padding-bottom: 10px;
+      margin-bottom: 25px;
+      font-weight: 600;
+    }
+    
+    .section-title.small {
+      font-size: 1.3rem;
+      margin-top: 25px;
+    }
+    
+    /* Formulaire - style cohérent */
+    .form-group {
+      margin-bottom: 25px;
+    }
+    
+    .form-label {
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 8px;
+      display: block;
+    }
+    
+    .form-input, .form-textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: all 0.3s;
+      font-family: inherit;
+    }
+    
+    .form-input:focus, .form-textarea:focus {
+      border-color: #0055a4;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 85, 164, 0.1);
+    }
+    
+    .form-textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    /* Bouton - style cohérent */
+    .btn-submit {
+      background: #0055a4;
+      color: white;
+      border: none;
+      padding: 14px 30px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+    
+    .btn-submit:hover {
+      background: #003366;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .btn-submit:active {
+      transform: translateY(0);
+    }
+    
+    /* Cartes de contact */
+    .contact-card {
+      background: white;
+      border-radius: 6px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      border-top: 5px solid #e31837;
+      height: 100%;
+    }
+    
+    .contact-card.blue {
+      border-top-color: #0055a4;
+    }
+    
+    .contact-card.yellow {
+      border-top-color: #ffd100;
+    }
+    
+    .contact-icon {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: #0055a4;
+    }
+    
+    /* Liste des contacts */
+    .contact-list {
+      list-style: none;
+      padding-left: 0;
+    }
+    
+    .contact-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+    }
+    
+    .contact-list li:last-child {
+      border-bottom: none;
+    }
+    
+    .contact-list li:before {
+      content: "•";
+      color: #e31837;
+      margin-right: 10px;
+      font-size: 1.5rem;
+    }
+    
+    /* Info importante */
+    .info-box {
+      background: #fff9e6;
+      border-left: 4px solid #ffd100;
+      padding: 20px;
+      margin: 25px 0;
+      border-radius: 6px;
+    }
+    
+    /* Footer identique */
+    .site-footer {
+      background: #333;
+      color: white;
+      padding: 30px 0;
+      margin-top: 50px;
+      border-top: 5px solid #ffd100;
+      text-align: center;
+    }
+    
+    /* Responsive - mêmes breakpoints */
+    @media (max-width: 768px) {
+      .logo-transco {
+        font-size: 1.8rem;
+      }
+      
+      .nav-link-custom {
+        padding: 10px 12px !important;
+        font-size: 0.9rem;
+        border-right: none;
+        border-bottom: 1px solid #dee2e6;
+      }
+      
+      .content-section {
+        padding: 20px;
+      }
+      
+      .contact-card {
+        padding: 20px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .main-content {
+        padding: 0 15px;
+      }
+      
+      .content-section {
+        padding: 15px;
+      }
+      
+      .btn-submit {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>
-      <p style="text-align:center"><h style="color:red" >TRA</h><h style="color:blue">NS</h><h style="color:yellow">CO</h></p>
-    </h1>
-      <a href="accueil.html">Accueil</a>
-      <a href="actualites.html">Actualités</a>
-      <a href="apropos.html">À propos</a>
-      <a href="connexion.html">Connexion</a>
-      <a href="contact.html">Contact</a>
-      <a href="galerie.html">Galerie</a>
-      <a href="horaire.html">Horaire</a>
-      <a href="itineraire.html">Itineraire</a>
-      <a href="ligne.html">Ligne</a>
-      <a href="tableau.html">Tableau de bord</a>
-   
+  <!-- Header identique -->
+  <header class="site-header">
+    <div class="container">
+      <div class="text-center py-3">
+        <h1 class="logo-transco mb-2">
+          <span class="tra">TRA</span><span class="ns">NS</span><span class="co">CO</span>
+        </h1>
+        <p class="text-muted mb-1">Contact et Réclamations</p>
+        <p class="text-muted small">Service client TRANSCO RDC</p>
+      </div>
+      
+      <!-- Navigation identique -->
+      <nav class="main-nav">
+        <div class="container">
+          <div class="d-flex flex-wrap justify-content-center">
+            <a href="accueil.html" class="nav-link-custom">Accueil</a>
+            <a href="actualites.html" class="nav-link-custom">Actualités</a>
+            <a href="apropos.html" class="nav-link-custom">À propos</a>
+            <a href="connexion.html" class="nav-link-custom">Connexion</a>
+            <a href="contact.html" class="nav-link-custom active">Contact</a>
+            <a href="galerie.html" class="nav-link-custom">Galerie</a>
+            <a href="horaire.html" class="nav-link-custom">Horaires</a>
+            <a href="itineraire.html" class="nav-link-custom">Itinéraires</a>
+            <a href="ligne.html" class="nav-link-custom">Lignes</a>
+            <a href="tableau.html" class="nav-link-custom">Tableau de bord</a>
+          </div>
+        </div>
+      </nav>
+    </div>
   </header>
-  
-  <main>
+
+  <!-- Contenu principal -->
+  <main class="main-content">
+    <!-- Section d'introduction -->
+    <div class="content-section">
+      <h2 class="section-title">Contact & Réclamations TRANSCO</h2>
+      
+      <p class="mb-3">
+        Cette page permet aux usagers de contacter la société TRANSCO pour toute information,
+        suggestion ou réclamation concernant les services de transport en commun.
+      </p>
+      
+      <p>
+        Pour toute demande, veuillez remplir le formulaire ci-dessous ou utiliser les
+        coordonnées mises à disposition. Notre équipe du service client s'engage à vous répondre
+        dans les meilleurs délais.
+      </p>
+    </div>
     
+    <!-- Formulaire de contact -->
+    <div class="content-section">
+      <h3 class="section-title small">Formulaire de contact</h3>
+      
+      <form id="contactForm">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="nom" class="form-label">Nom complet *</label>
+              <input 
+                type="text" 
+                id="nom" 
+                name="nom" 
+                class="form-input" 
+                placeholder="Votre nom et prénom" 
+                required
+              >
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="email" class="form-label">Adresse e-mail *</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                class="form-input" 
+                placeholder="exemple@email.com" 
+                required
+              >
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="objet" class="form-label">Objet du message *</label>
+          <select id="objet" name="objet" class="form-input" required>
+            <option value="" disabled selected>Sélectionnez une option</option>
+            <option value="reclamation">Réclamation service</option>
+            <option value="information">Demande d'information</option>
+            <option value="suggestion">Suggestion d'amélioration</option>
+            <option value="perte">Objet perdu</option>
+            <option value="autre">Autre demande</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="message" class="form-label">Votre message *</label>
+          <textarea 
+            id="message" 
+            name="message" 
+            class="form-textarea" 
+            placeholder="Décrivez votre demande en détail..." 
+            required
+          ></textarea>
+          <div class="form-text" style="font-size: 0.85rem; color: #666; margin-top: 5px;">
+            Maximum 1000 caractères
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <div class="form-check">
+            <input type="checkbox" id="newsletter" name="newsletter" class="form-check-input">
+            <label for="newsletter" class="form-check-label" style="cursor: pointer;">
+              Je souhaite recevoir les actualités de TRANSCO par e-mail
+            </label>
+          </div>
+        </div>
+        
+        <button type="submit" class="btn-submit">
+          📨 Envoyer mon message
+        </button>
+        
+        <p class="small text-muted mt-3">
+          * Champs obligatoires. Nous nous engageons à répondre dans un délai de 48h.
+        </p>
+      </form>
+    </div>
     
+    <!-- Informations importantes -->
+    <div class="info-box">
+      <p class="mb-2"><strong>📞 Urgences et réclamations immédiates :</strong></p>
+      <p class="mb-0">
+        Pour les problèmes urgents concernant la sécurité ou le fonctionnement des bus,
+        contactez notre service d'urgence au <strong>+243 81 700 1111</strong> (24h/24).
+      </p>
+    </div>
     
+    <!-- Coordonnées -->
+    <div class="content-section">
+      <h3 class="section-title small">Nos coordonnées</h3>
+      
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="contact-card">
+            <div class="contact-icon">🏢</div>
+            <h5 style="color: #0055a4;">Siège social</h5>
+            <p class="mb-0">
+              Avenue des Transports, N°123<br>
+              Commune de la Gombe<br>
+              Kinshasa, RDC
+            </p>
+          </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+          <div class="contact-card blue">
+            <div class="contact-icon">📞</div>
+            <h5 style="color: #0055a4;">Téléphones</h5>
+            <p class="mb-0">
+              Standard : +243 81 700 0000<br>
+              Service client : +243 81 700 2222<br>
+              Urgences : +243 81 700 1111
+            </p>
+          </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+          <div class="contact-card yellow">
+            <div class="contact-icon">✉️</div>
+            <h5 style="color: #0055a4;">E-mails</h5>
+            <p class="mb-0">
+              Général : contact@transco.cd<br>
+              Service client : client@transco.cd<br>
+              Réclamations : reclamation@transco.cd
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Horaires d'ouverture -->
+      <div class="mt-4">
+        <h5 style="color: #e31837;">Horaires d'ouverture du service client</h5>
+        <div class="row">
+          <div class="col-md-6">
+            <ul class="contact-list">
+              <li><strong>Lundi - Vendredi :</strong> 7h30 - 18h00</li>
+              <li><strong>Samedi :</strong> 8h00 - 14h00</li>
+              <li><strong>Dimanche :</strong> Fermé</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <ul class="contact-list">
+              <li><strong>Guichet physique :</strong> Ouvert aux mêmes heures</li>
+              <li><strong>Téléphone :</strong> 7h30 - 20h00</li>
+              <li><strong>Urgences :</strong> 24h/24, 7j/7</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
     
+    <!-- Message final -->
+    <div class="content-section">
+      <h3 class="section-title small">Notre engagement</h3>
+      <p>
+        TRANSCO reste à l'écoute de ses usagers afin d'améliorer continuellement la qualité
+        de ses services. Chaque suggestion, réclamation ou retour d'expérience nous aide à
+        mieux répondre à vos besoins et à optimiser notre réseau de transport.
+      </p>
+      <p class="mb-0">
+        Nous traitons chaque demande avec sérieux et confidentialité, dans le respect des
+        données personnelles de nos usagers.
+      </p>
+    </div>
   </main>
-  
-  <footer>
-    
-    
+
+  <!-- Footer identique -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 text-md-start text-center mb-3 mb-md-0">
+          <h5>TRANSCO RDC</h5>
+          <p>Service client et réclamations<br>
+          Transport en commun public<br>
+          © 2015-2026 Tous droits réservés</p>
+        </div>
+        
+        <div class="col-md-6 text-md-end text-center">
+          <h5>Liens utiles</h5>
+          <p>
+            <a href="horaire.html" style="color: white; text-decoration: none;">Horaires des bus</a> • 
+            <a href="ligne.html" style="color: white; text-decoration: none;">Lignes disponibles</a><br>
+            <a href="actualites.html" style="color: white; text-decoration: none;">Actualités</a> • 
+            <a href="apropos.html" style="color: white; text-decoration: none;">À propos de TRANSCO</a>
+          </p>
+        </div>
+      </div>
+      
+      <hr class="bg-light my-3">
+      
+      <div class="text-center">
+        <p class="small mb-0">
+          Formulaire de contact sécurisé • Réponse sous 48h • Service client certifié
+        </p>
+      </div>
+    </div>
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   
-</body>
-</html>
+  <script>
+    // Script de gestion du formulaire de contact
+    document.addEventListener('DOMContentLoaded', function() {
+      const contactForm = document.getElementById('contactForm');
+      const messageTextarea = document.getElementById('message');
+      const submitButton = contactForm.querySelector('button[type="submit"]');
+      
+      // Limite de caractères pour le message
+      if (messageTextarea) {
+        messageTextarea.addEventListener('input', function() {
+          const maxLength = 1000;
+          const currentLength = this.value.length;
+          
+          // Trouver ou créer le compteur
+          let counter = document.querySelector('.char-counter');
+          if (!counter) {
+            counter = document.createElement('div');
+            counter.className = 'char-counter';
+            counter.style.fontSize = '0.8rem';
+            counter.style.color = '#666';
+            counter.style.marginTop = '5px';
+            messageTextarea.parentNode.appendChild(counter);
+          }
+          
+          // Mettre à jour le compteur
+          counter.textContent = `${currentLength} / ${maxLength} caractères`;
+          
+          // Changer la couleur si proche de la limite
+          if (currentLength > maxLength * 0.9) {
+            counter.style.color = '#e31837';
+          } else if (currentLength > maxLength * 0.75) {
+            counter.style.color = '#ffd100';
+          } else {
+            counter.style.color = '#666';
+          }
+          
+          // Limiter le texte si nécessaire
+          if (currentLength > maxLength) {
+            this.value = this.value.substring(0, maxLength);
+            counter.textContent = `${maxLength} / ${maxLength} caractères (limite atteinte)`;
+            counter.style.color = '#e31837';
+          }
+        });
+        
+        // Déclencher l'événement input pour initialiser le compteur
+        messageTextarea.dispatchEvent(new Event('input'));
+      }
+      
+      // Validation du formulaire
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Récupération des valeurs
+        const nom = document.getElementById('nom').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const objet = document.getElementById('objet').value;
+        const message = messageTextarea.value.trim();
+        
+        // Validation
+        let errors = [];
+        
+        if (!nom) errors.push('Le nom est obligatoire');
+        if (!email) errors.push('L\'email est obligatoire');
+        if (!objet) errors.push('Veuillez sélectionner un objet');
+        if (!message) errors.push('Le message est obligatoire');
+        
+        if (email && !isValidEmail(email)) {
+          errors.push('Veuillez entrer une adresse email valide');
+        }
+        
+        if (message.length < 10) {
+          errors.push('Le message doit contenir au moins 10 caractères');
+        }
+        
+        // Afficher les erreurs ou soumettre
+        if (errors.length > 0) {
+          showMessage(errors.join('<br>'), 'error');
+        } else {
+          // Simulation d'envoi
+          const originalText = submitButton.innerHTML;
+          submitButton.innerHTML = '⏳ Envoi en cours...';
+          submitButton.disabled = true;
+          
+          setTimeout(() => {
+            showMessage('✅ Votre message a été envoyé avec succès ! Notre équipe vous répondra dans les plus brefs délais.', 'success');
+            
+            // Réinitialiser le formulaire
+            contactForm.reset();
+            
+            // Réactiver le bouton
+            submitButton.innerHTML = originalText;
+            submitButton.disabled = false;
+            
+            // Réinitialiser le compteur
+            if (messageTextarea) {
+              messageTextarea.dispatchEvent(new Event('input'));
+            }
+            
+            // Faire défiler vers le haut
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }, 2000);
+        }
+      });
+      
+      // Fonction de validation d'email
+      function isValidEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+      }
+      
+      // Fonction pour afficher des messages
+      function showMessage(message, type) {
+        // Supprimer les messages précédents
+        const existingMessage = document.querySelector('.form-message');
+        if (existingMessage) {
+          existingMessage.remove();
+        }
+        
+        // Créer le nouveau message
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `form-message ${type === 'error' ? 'alert-danger' : 'alert-success'}`;
+        messageDiv.style.padding = '15px';
+        messageDiv.style.borderRadius = '6px';
+        messageDiv.style.margin = '20px 0';
+        messageDiv.style.backgroundColor = type === 'error' ? '#f8d7da' : '#d4edda';
+        messageDiv.style.color = type === 'error' ? '#721c24' : '#155724';
+        messageDiv.style.border = type === 'error' ? '1px solid #f5c6cb' : '1px solid #c3e6cb';
+        messageDiv.innerHTML = message;
+        
+        // Insérer après le formulaire
+        contactForm.parentNode.insertBefore(messageDiv, contactForm.nextSibling);
+        
+      
