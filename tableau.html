@@ -1,39 +1,600 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="fr">
 <head>
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
-  <title>Hello, World!</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tableau de Bord - TRANSCO Admin</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Mêmes styles que les pages précédentes */
+    :root {
+      --transco-red: #e31837;
+      --transco-blue: #0055a4;
+      --transco-yellow: #ffd100;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f5f5;
+    }
+    
+    /* Header identique aux autres pages */
+    .site-header {
+      background: white;
+      border-bottom: 4px solid #e31837;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .logo-transco {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+    
+    .tra { color: #e31837; }
+    .ns { color: #0055a4; }
+    .co { color: #ffd100; }
+    
+    /* Navigation identique */
+    .main-nav {
+      background: #f8f9fa;
+      border-top: 1px solid #dee2e6;
+    }
+    
+    .nav-link-custom {
+      color: #333 !important;
+      font-weight: 500;
+      padding: 12px 15px !important;
+      border-right: 1px solid #dee2e6;
+      text-decoration: none;
+    }
+    
+    .nav-link-custom:hover {
+      background: #e31837;
+      color: white !important;
+    }
+    
+    .nav-link-custom.active {
+      background: #0055a4;
+      color: white !important;
+    }
+    
+    /* Contenu principal - style cohérent */
+    .main-content {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    
+    .dashboard-header {
+      background: white;
+      padding: 25px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      border-left: 5px solid #0055a4;
+    }
+    
+    /* Cartes de statistiques - style similaire */
+    .stat-card {
+      background: white;
+      border-radius: 6px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      border-top: 5px solid #e31837;
+      height: 100%;
+      transition: transform 0.3s;
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-3px);
+    }
+    
+    .stat-card.blue {
+      border-top-color: #0055a4;
+    }
+    
+    .stat-card.yellow {
+      border-top-color: #ffd100;
+    }
+    
+    .stat-card.green {
+      border-top-color: #28a745;
+    }
+    
+    .stat-number {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 5px;
+    }
+    
+    .stat-label {
+      color: #666;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    /* Sections de contenu */
+    .content-section {
+      background: white;
+      border-radius: 6px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      border-left: 4px solid #ffd100;
+    }
+    
+    .section-title {
+      color: #0055a4;
+      border-bottom: 2px solid #ffd100;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    
+    /* Liste des fonctionnalités - style cohérent */
+    .feature-list {
+      padding-left: 0;
+    }
+    
+    .feature-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+      list-style: none;
+      position: relative;
+      padding-left: 25px;
+    }
+    
+    .feature-list li:before {
+      content: "✓";
+      color: #28a745;
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+    
+    /* Boutons - même style que connexion */
+    .btn-admin {
+      background: #0055a4;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    
+    .btn-admin:hover {
+      background: #003366;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-admin.red {
+      background: #e31837;
+    }
+    
+    .btn-admin.red:hover {
+      background: #c4122f;
+    }
+    
+    /* Tableau */
+    .dashboard-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .dashboard-table th {
+      background: #f8f9fa;
+      color: #0055a4;
+      text-align: left;
+      padding: 12px 15px;
+      border-bottom: 2px solid #dee2e6;
+    }
+    
+    .dashboard-table td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .dashboard-table tr:hover {
+      background: #f8f9fa;
+    }
+    
+    /* Alertes - style cohérent */
+    .alert-admin {
+      background: #fff9e6;
+      border-left: 4px solid #ffd100;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+    }
+    
+    /* Info utilisateur */
+    .user-info-box {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 6px;
+      border-left: 4px solid #0055a4;
+    }
+    
+    /* Footer identique */
+    .site-footer {
+      background: #333;
+      color: white;
+      padding: 30px 0;
+      margin-top: 50px;
+      border-top: 5px solid #ffd100;
+      text-align: center;
+    }
+    
+    /* Responsive - mêmes breakpoints */
+    @media (max-width: 768px) {
+      .logo-transco {
+        font-size: 1.8rem;
+      }
+      
+      .nav-link-custom {
+        padding: 10px 12px !important;
+        font-size: 0.9rem;
+        border-right: none;
+        border-bottom: 1px solid #dee2e6;
+      }
+      
+      .stat-number {
+        font-size: 1.8rem;
+      }
+      
+      .main-content {
+        padding: 0 15px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>
-      <p style="text-align:center"><h style="color:red" >TRA</h><h style="color:blue">NS</h><h style="color:yellow">CO</h></p>
-    </h1>
-      <a href="accueil.html">Accueil</a>
-      <a href="actualites.html">Actualités</a>
-      <a href="apropos.html">À propos</a>
-      <a href="connexion.html">Connexion</a>
-      <a href="contact.html">Contact</a>
-      <a href="galerie.html">Galerie</a>
-      <a href="horaire.html">Horaire</a>
-      <a href="itineraire.html">Itineraire</a>
-      <a href="ligne.html">Ligne</a>
-      <a href="tableau.html">Tableau de bord</a>
-   
+  <!-- Header identique aux autres pages -->
+  <header class="site-header">
+    <div class="container">
+      <div class="text-center py-3">
+        <h1 class="logo-transco mb-2">
+          <span class="tra">TRA</span><span class="ns">NS</span><span class="co">CO</span>
+        </h1>
+        <p class="text-muted mb-1">Tableau de Bord Administrateur</p>
+        <p class="text-muted small">Gestion du système TRANSCO RDC</p>
+      </div>
+      
+      <!-- Navigation identique -->
+      <nav class="main-nav">
+        <div class="container">
+          <div class="d-flex flex-wrap justify-content-center">
+            <a href="accueil.html" class="nav-link-custom">Accueil</a>
+            <a href="actualites.html" class="nav-link-custom">Actualités</a>
+            <a href="apropos.html" class="nav-link-custom">À propos</a>
+            <a href="connexion.html" class="nav-link-custom">Connexion</a>
+            <a href="contact.html" class="nav-link-custom">Contact</a>
+            <a href="galerie.html" class="nav-link-custom">Galerie</a>
+            <a href="horaire.html" class="nav-link-custom">Horaires</a>
+            <a href="itineraire.html" class="nav-link-custom">Itinéraires</a>
+            <a href="ligne.html" class="nav-link-custom">Lignes</a>
+            <a href="tableau.html" class="nav-link-custom active">Tableau de bord</a>
+          </div>
+        </div>
+      </nav>
+    </div>
   </header>
-  
-  <main>
+
+  <!-- Contenu principal -->
+  <main class="main-content">
+    <!-- En-tête du tableau de bord -->
+    <div class="dashboard-header">
+      <div class="d-flex justify-content-between align-items-center flex-wrap">
+        <div>
+          <h2 class="mb-2" style="color: #0055a4;">Tableau de Bord Administrateur</h2>
+          <p class="text-muted mb-0">Bienvenue dans l'espace de gestion du site TRANSCO</p>
+        </div>
+        
+        <div class="user-info-box">
+          <div class="d-flex align-items-center">
+            <div style="width: 40px; height: 40px; background: #0055a4; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-weight: bold;">
+              JK
+            </div>
+            <div>
+              <div class="small">Connecté en tant que</div>
+              <div class="fw-bold">Jean Kabasele</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     
+    <!-- Alertes -->
+    <div class="alert-admin">
+      <strong>⚠️ Note importante :</strong> Cet espace est réservé exclusivement aux administrateurs autorisés. 
+      Toutes les modifications sont tracées et enregistrées dans les logs du système.
+    </div>
     
+    <!-- Cartes de statistiques -->
+    <div class="row mb-4">
+      <div class="col-md-3 col-sm-6">
+        <div class="stat-card">
+          <div class="stat-number">24</div>
+          <div class="stat-label">Lignes actives</div>
+          <div class="small mt-2" style="color: #28a745;">+2 cette semaine</div>
+        </div>
+      </div>
+      
+      <div class="col-md-3 col-sm-6">
+        <div class="stat-card blue">
+          <div class="stat-number">156</div>
+          <div class="stat-label">Bus en service</div>
+          <div class="small mt-2" style="color: #0055a4;">84% disponibilité</div>
+        </div>
+      </div>
+      
+      <div class="col-md-3 col-sm-6">
+        <div class="stat-card yellow">
+          <div class="stat-number">42</div>
+          <div class="stat-label">Messages reçus</div>
+          <div class="small mt-2" style="color: #ffd100;">12 non lus</div>
+        </div>
+      </div>
+      
+      <div class="col-md-3 col-sm-6">
+        <div class="stat-card green">
+          <div class="stat-number">18</div>
+          <div class="stat-label">Actualités publiées</div>
+          <div class="small mt-2" style="color: #28a745;">3 en attente</div>
+        </div>
+      </div>
+    </div>
     
+    <!-- Sections principales -->
+    <div class="row">
+      <!-- Fonctionnalités disponibles -->
+      <div class="col-lg-6 mb-4">
+        <div class="content-section">
+          <h4 class="section-title">Fonctionnalités disponibles</h4>
+          <ul class="feature-list">
+            <li>Gestion des lignes de transport</li>
+            <li>Gestion des horaires de bus</li>
+            <li>Gestion des itinéraires</li>
+            <li>Publication des actualités et annonces</li>
+            <li>Gestion des messages et réclamations des usagers</li>
+            <li>Modération des commentaires</li>
+            <li>Gestion des galeries photos</li>
+            <li>Statistiques de consultation</li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Actions rapides -->
+      <div class="col-lg-6 mb-4">
+        <div class="content-section">
+          <h4 class="section-title">Actions rapides</h4>
+          
+          <div class="mb-3">
+            <a href="ligne.html?action=add" class="btn-admin me-2 mb-2">
+              + Ajouter une nouvelle ligne
+            </a>
+            
+            <a href="horaire.html?action=edit" class="btn-admin me-2 mb-2">
+              ✏️ Modifier les horaires
+            </a>
+          </div>
+          
+          <div class="mb-3">
+            <a href="actualites.html?action=add" class="btn-admin me-2 mb-2">
+              📢 Publier une actualité
+            </a>
+            
+            <a href="contact.html" class="btn-admin me-2 mb-2">
+              ✉️ Voir les messages
+            </a>
+          </div>
+          
+          <div>
+            <a href="#" class="btn-admin red me-2 mb-2">
+              ⚠️ Alertes système
+            </a>
+            
+            <a href="#" class="btn-admin mb-2">
+              📊 Exporter les données
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
     
+    <!-- Statistiques détaillées -->
+    <div class="content-section mb-4">
+      <h4 class="section-title">Statistiques générales</h4>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <table class="dashboard-table">
+            <tbody>
+              <tr>
+                <td><strong>Lignes enregistrées</strong></td>
+                <td class="text-end">24</td>
+              </tr>
+              <tr>
+                <td><strong>Bus en circulation</strong></td>
+                <td class="text-end">156</td>
+              </tr>
+              <tr>
+                <td><strong>Messages reçus (7 derniers jours)</strong></td>
+                <td class="text-end">42</td>
+              </tr>
+              <tr>
+                <td><strong>Actualités publiées</strong></td>
+                <td class="text-end">18</td>
+              </tr>
+              <tr>
+                <td><strong>Consultations du site (mois)</strong></td>
+                <td class="text-end">12,458</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="p-3" style="background: #f8f9fa; border-radius: 6px;">
+            <h6 style="color: #0055a4;">Activité récente</h6>
+            <ul class="list-unstyled mb-0">
+              <li class="mb-2">• Modification horaire Ligne 12 (il y a 2h)</li>
+              <li class="mb-2">• Nouveau message de M. Diallo (il y a 3h)</li>
+              <li class="mb-2">• Publication actualité "Nouvelle ligne" (hier)</li>
+              <li class="mb-0">• Mise à jour itinéraire Ligne 8 (il y a 2 jours)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Actions administratives -->
+    <div class="content-section">
+      <h4 class="section-title">Actions administratives</h4>
+      
+      <div class="row">
+        <div class="col-md-8">
+          <p class="mb-3">
+            Cet espace est réservé exclusivement aux administrateurs autorisés afin d'assurer 
+            une bonne gestion du site web TRANSCO. Toutes les actions sont tracées et enregistrées 
+            dans les logs de sécurité.
+          </p>
+          
+          <div class="d-flex flex-wrap align-items-center">
+            <div class="me-4 mb-2">
+              <a href="connexion.html" class="btn-admin red">
+                🚪 Déconnexion
+              </a>
+            </div>
+            
+            <div class="me-4 mb-2">
+              <div class="small text-muted">Version système</div>
+              <div class="fw-bold">v2.4.1</div>
+            </div>
+            
+            <div class="me-4 mb-2">
+              <div class="small text-muted">Dernière sauvegarde</div>
+              <div class="fw-bold">Hier, 02:00</div>
+            </div>
+            
+            <div class="mb-2">
+              <div class="small text-muted">Session active depuis</div>
+              <div class="fw-bold">1 heure 24 min</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="text-center p-3" style="background: linear-gradient(135deg, #0055a4 0%, #003366 100%); color: white; border-radius: 6px;">
+            <div class="mb-2">
+              <div style="font-size: 2rem; font-weight: bold;">98%</div>
+              <div class="small">Disponibilité système</div>
+            </div>
+            <button class="btn btn-sm btn-light">Rapport complet</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
-  
-  <footer>
-    
-    
+
+  <!-- Footer identique -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 text-md-start text-center">
+          <h5>TRANSCO RDC</h5>
+          <p>Tableau de bord d'administration<br>
+          Direction des Systèmes d'Information<br>
+          © 2015-2026 Tous droits réservés</p>
+        </div>
+        
+        <div class="col-md-6 text-md-end text-center">
+          <h5>Support technique</h5>
+          <p>Email : admin@transco.cd<br>
+          Téléphone : +243 81 700 0000<br>
+          Urgences : 24h/24</p>
+        </div>
+      </div>
+      
+      <hr class="bg-light my-3">
+      
+      <div class="text-center">
+        <p class="small mb-0">
+          Accès sécurisé • Session en cours • Toutes les modifications sont enregistrées
+        </p>
+      </div>
+    </div>
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   
+  <script>
+    // Script simple pour les interactions
+    document.addEventListener('DOMContentLoaded', function() {
+      // Animation des cartes au survol
+      const statCards = document.querySelectorAll('.stat-card');
+      statCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+          this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+          this.style.boxShadow = '0 3px 10px rgba(0,0,0,0.08)';
+        });
+      });
+      
+      // Mise à jour de l'heure de session
+      function updateSessionTime() {
+        const sessionElement = document.querySelector('.fw-bold:nth-child(2)');
+        if (sessionElement && sessionElement.textContent.includes('heure')) {
+          // Simulation d'incrémentation du temps
+          const hours = 1;
+          const minutes = Math.floor(Math.random() * 10) + 24;
+          sessionElement.textContent = `${hours} heure ${minutes} min`;
+        }
+      }
+      
+      // Mettre à jour toutes les minutes
+      setInterval(updateSessionTime, 60000);
+      
+      // Confirmation pour la déconnexion
+      const logoutBtn = document.querySelector('.btn-admin.red');
+      if (logoutBtn && logoutBtn.textContent.includes('Déconnexion')) {
+        logoutBtn.addEventListener('click', function(e) {
+          if (!confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+            e.preventDefault();
+          }
+        });
+      }
+      
+      // Simulation de chargement pour les boutons d'action
+      const actionButtons = document.querySelectorAll('.btn-admin:not(.red)');
+      actionButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          if (this.getAttribute('href') === '#') {
+            e.preventDefault();
+            const originalText = this.innerHTML;
+            this.innerHTML = '⏳ Traitement...';
+            this.style.opacity = '0.7';
+            
+            setTimeout(() => {
+              this.innerHTML = originalText;
+              this.style.opacity = '1';
+              alert('Action simulée - En production, cela ouvrirait la fonction correspondante.');
+            }, 1000);
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
