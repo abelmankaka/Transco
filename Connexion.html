@@ -1,39 +1,324 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="fr">
 <head>
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
-  <title>Hello, World!</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRANSCO - Transport en Commun RDC</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Styles manuels - ajustés pour paraître naturel */
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f5f5f5;
+    }
+    
+    /* Header personnalisé */
+    .site-header {
+      background: white;
+      border-bottom: 4px solid #e31837;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .logo-transco {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+    
+    .tra { color: #e31837; }
+    .ns { color: #0055a4; }
+    .co { color: #ffd100; }
+    
+    /* Navigation */
+    .main-nav {
+      background: #f8f9fa;
+      border-top: 1px solid #dee2e6;
+    }
+    
+    .nav-link-custom {
+      color: #333 !important;
+      font-weight: 500;
+      padding: 12px 15px !important;
+      border-right: 1px solid #dee2e6;
+    }
+    
+    .nav-link-custom:hover {
+      background: #e31837;
+      color: white !important;
+    }
+    
+    /* Hero section */
+    .hero-bg {
+      background: linear-gradient(135deg, #0055a4 0%, #003366 100%);
+      color: white;
+      border-radius: 8px;
+      padding: 40px;
+      margin: 20px 0;
+    }
+    
+    /* Cartes services */
+    .service-card {
+      background: white;
+      border-radius: 6px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      border-top: 5px solid #e31837;
+      height: 100%;
+    }
+    
+    .service-card.blue {
+      border-top-color: #0055a4;
+    }
+    
+    .service-card.yellow {
+      border-top-color: #ffd100;
+    }
+    
+    /* Section avantages */
+    .avantage-item {
+      text-align: center;
+      padding: 15px;
+    }
+    
+    .avantage-icon {
+      width: 60px;
+      height: 60px;
+      background: #e31837;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px;
+      font-size: 24px;
+    }
+    
+    /* Footer */
+    .site-footer {
+      background: #333;
+      color: white;
+      padding: 30px 0;
+      margin-top: 50px;
+      border-top: 5px solid #ffd100;
+    }
+    
+    /* Petites imperfections volontaires pour l'authenticité */
+    .manual-spacing {
+      margin-top: 15px !important;
+    }
+    
+    .irregular-shadow {
+      box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+    }
+    
+    /* Responsive manuel */
+    @media (max-width: 768px) {
+      .logo-transco {
+        font-size: 1.8rem;
+      }
+      
+      .hero-bg {
+        padding: 20px;
+      }
+      
+      .nav-link-custom {
+        border-right: none;
+        border-bottom: 1px solid #dee2e6;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>
-      <p style="text-align:center"><h style="color:red" >TRA</h><h style="color:blue">NS</h><h style="color:yellow">CO</h></p>
-    </h1>
-      <a href="accueil.html">Accueil</a>
-      <a href="actualites.html">Actualités</a>
-      <a href="apropos.html">À propos</a>
-      <a href="connexion.html">Connexion</a>
-      <a href="contact.html">Contact</a>
-      <a href="galerie.html">Galerie</a>
-      <a href="horaire.html">Horaire</a>
-      <a href="itineraire.html">Itineraire</a>
-      <a href="ligne.html">Ligne</a>
-      <a href="tableau.html">Tableau de bord</a>
-   
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <div class="text-center py-3">
+        <h1 class="logo-transco">
+          <span class="tra">TRA</span><span class="ns">NS</span><span class="co">CO</span>
+        </h1>
+        <p class="text-muted mb-0">Transport en Commun de la République Démocratique du Congo</p>
+        <p class="text-muted small">Service public depuis 2015</p>
+      </div>
+    </div>
+    
+    <!-- Navigation - version manuelle -->
+    <nav class="main-nav">
+      <div class="container">
+        <div class="d-flex flex-wrap justify-content-center">
+          <a href="accueil.html" class="nav-link-custom text-decoration-none">Accueil</a>
+          <a href="actualites.html" class="nav-link-custom text-decoration-none">Actualités</a>
+          <a href="apropos.html" class="nav-link-custom text-decoration-none">À propos</a>
+          <a href="connexion.html" class="nav-link-custom text-decoration-none">Connexion</a>
+          <a href="contact.html" class="nav-link-custom text-decoration-none">Contact</a>
+          <a href="galerie.html" class="nav-link-custom text-decoration-none">Galerie</a>
+          <a href="horaire.html" class="nav-link-custom text-decoration-none">Horaires</a>
+          <a href="itineraire.html" class="nav-link-custom text-decoration-none">Itinéraires</a>
+          <a href="ligne.html" class="nav-link-custom text-decoration-none">Lignes</a>
+          <a href="tableau.html" class="nav-link-custom text-decoration-none">Tableau de bord</a>
+        </div>
+      </div>
+    </nav>
   </header>
-  
-  <main>
-    
-    
-    
-    
+
+  <main class="container">
+    <!-- Section principale -->
+    <section class="hero-bg irregular-shadow">
+      <div class="row align-items-center">
+        <div class="col-md-7">
+          <h2 class="mb-3">Bienvenue chez TRANSCO</h2>
+          <p class="mb-3">Notre mission est de fournir un transport en commun fiable et accessible à tous les Congolais. Avec plus de 50 lignes à travers le pays, nous connectons les communautés et facilitons la mobilité urbaine.</p>
+          <p class="mb-3">TRANSCO s'engage à améliorer continuellement ses services pour répondre aux besoins croissants de la population. Notre équipe travaille jour et nuit pour assurer votre sécurité et votre confort.</p>
+          <p>Ce site vous permet de consulter nos horaires, lignes et itinéraires en temps réel.</p>
+          <a href="apropos.html" class="btn btn-warning mt-2">Découvrir notre histoire</a>
+        </div>
+        <div class="col-md-5">
+          <img src="IMG_20260109_150924_681.jpg" alt="ABEL MKK" class="img-fluid rounded irregular-shadow">
+          <p class="text-center small mt-2">Notre flotte moderne de véhicules</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pourquoi nous choisir -->
+    <section class="my-5">
+      <h2 class="text-center mb-4" style="color: #0055a4; border-bottom: 2px solid #ffd100; padding-bottom: 10px;">Pourquoi choisir TRANSCO ?</h2>
+      
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="avantage-item">
+            <div class="avantage-icon">
+              <span>✓</span>
+            </div>
+            <h5 style="color: #e31837;">Fiabilité garantie</h5>
+            <p>Des horaires respectés et un service régulier sur toutes nos lignes. Moins de 2% d'annulations en 2025.</p>
+          </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+          <div class="avantage-item">
+            <div class="avantage-icon" style="background: #0055a4;">
+              <span>👥</span>
+            </div>
+            <h5 style="color: #0055a4;">Accessible à tous</h5>
+            <p>Tarifs adaptés à tous les budgets. Cartes d'abonnement et réductions pour étudiants et personnes âgées.</p>
+          </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+          <div class="avantage-item">
+            <div class="avantage-icon" style="background: #ffd100; color: #333;">
+              <span>⚡</span>
+            </div>
+            <h5 style="color: #ffd100;">Service moderne</h5>
+            <p>Application mobile, informations en temps réel et paiement électronique disponible.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nos services -->
+    <section class="my-5">
+      <h2 class="text-center mb-4" style="color: #0055a4;">Nos services aux voyageurs</h2>
+      
+      <div class="row">
+        <div class="col-md-6 mb-4">
+          <div class="service-card">
+            <h5 class="mb-3" style="color: #e31837;">Informations voyageurs</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2">✓ Consultation des lignes et horaires</li>
+              <li class="mb-2">✓ Tarifs et abonnements</li>
+              <li class="mb-2">✓ Points de vente près de chez vous</li>
+              <li class="mb-2">✓ Règlement intérieur</li>
+            </ul>
+            <a href="ligne.html" class="btn btn-sm btn-outline-danger">Voir les lignes</a>
+          </div>
+        </div>
+        
+        <div class="col-md-6 mb-4">
+          <div class="service-card blue">
+            <h5 class="mb-3" style="color: #0055a4;">Services en ligne</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2">✓ Calcul d'itinéraire personnalisé</li>
+              <li class="mb-2">✓ Alertes trafic et perturbations</li>
+              <li class="mb-2">✓ Formulaire de contact en ligne</li>
+              <li class="mb-2">✓ Galerie photos et vidéos</li>
+            </ul>
+            <a href="itineraire.html" class="btn btn-sm btn-outline-primary">Planifier un trajet</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Alertes importantes -->
+    <div class="alert alert-warning irregular-shadow">
+      <div class="d-flex">
+        <div class="me-3">📢</div>
+        <div>
+          <strong>Information importante :</strong> Nouveaux horaires d'été applicables à partir du 1er juin 2026. Consultez la page des horaires pour plus de détails.
+          <a href="horaire.html" class="alert-link">Voir les changements</a>
+        </div>
+      </div>
+    </div>
   </main>
-  
-  <footer>
-    
-    
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h5>TRANSCO RDC</h5>
+          <p>Service public de transport en commun<br>
+          Siège social : Kinshasa, Gombe<br>
+          Email : mankakaabel@gmail.com<br>
+          Téléphone : +243 818 420 765</p>
+        </div>
+        
+        <div class="col-md-6">
+          <h5>Liens rapides</h5>
+          <div class="row">
+            <div class="col-6">
+              <ul class="list-unstyled">
+                <li><a href="actualites.html" class="text-white text-decoration-none">Actualités</a></li>
+                <li><a href="horaire.html" class="text-white text-decoration-none">Horaires</a></li>
+                <li><a href="ligne.html" class="text-white text-decoration-none">Lignes</a></li>
+              </ul>
+            </div>
+            <div class="col-6">
+              <ul class="list-unstyled">
+                <li><a href="contact.html" class="text-white text-decoration-none">Contact</a></li>
+                <li><a href="apropos.html" class="text-white text-decoration-none">À propos</a></li>
+                <li><a href="connexion.html" class="text-white text-decoration-none">Espace personnel</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <hr class="bg-light">
+      
+      <div class="text-center pt-3">
+        <p class="mb-2">&copy; 2026 TRANSCO RDC. Tous droits réservés.</p>
+        <p class="small mb-0">Ministère des Transports - République Démocratique du Congo</p>
+      </div>
+    </div>
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   
+  <!-- Petit script manuel -->
+  <script>
+    // Simple script pour la navigation active
+    document.addEventListener('DOMContentLoaded', function() {
+      const currentPage = window.location.pathname.split('/').pop();
+      const navLinks = document.querySelectorAll('.nav-link-custom');
+      
+      navLinks.forEach(link => {
+        if (link.getAttribute('href') === currentPage) {
+          link.style.backgroundColor = '#e31837';
+          link.style.color = 'white';
+        }
+      });
+    });
+  </script>
 </body>
 </html>
